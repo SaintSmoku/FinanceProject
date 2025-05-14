@@ -45,7 +45,7 @@ var appController = (function(uiController, financeController){
     }
   document.querySelector(".add__btn").addEventListener("click", function(){
     ctrlAddItem();
-    console.log("Clicked");
+    alert("Clicked");
   })
 
   document.addEventListener("keypress", function(event){
