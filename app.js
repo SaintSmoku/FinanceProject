@@ -2,18 +2,25 @@
 // Дэлгэцтэй ажиллах контроллер
 
 var uiController = (function(){
-  console.log("Hello from User Interface");
 
-  var x = 100;
-
-  function add(y){
-    return x + y;
+  var domStrings = {
+    inputType : ".add__type",
+    inputDescription : ".add__description",
+    inputValue : ".add__value",
+    addButton : ".add__btn",
+    keyPress : "keypress",
   }
-
+ 
   return {
-    publicAdd : function(el){
-      var result = add(el);
-      console.log("Bolovsruulsan utga : " + result);
+    getInput : function(){
+      return {
+        type : document.querySelector(domStrings.inputType).value,
+        description : document.querySelector(domStrings.inputDescription).value,
+        value : document.querySelector(domStrings.inputValue).value,
+      }
+    },
+    getDomStrings : function(){
+      return domStrings;
     }
   }
 
@@ -22,13 +29,31 @@ var uiController = (function(){
 
 // Санхүүтэй ажиллах контроллер
 var financeController = function(){
-  console.log("Hello from Finance");
+
+  var Income = function(id, description, value){
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  }
+
+  var Expense = function(id, description, value){
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  }
+
+  var financeData = {
+    
+  }
+  
 }();
 
 // Холбогч контроллер
 var appController = (function(uiController, financeController){
-
+  
   var ctrlAddItem = function(){
+  var test = uiController.getInput();
+  console.log(test);
 
     // Товч дарснаар эсвэл өгөгдлөө оруулаад "Enter" дарснаар :
     // 1. Оруулах өгөгдлийг дэлгэцээс олж авна.
@@ -36,21 +61,28 @@ var appController = (function(uiController, financeController){
     // 3. Олж авсан өгөгдлүүдээ веб дээр тохирох хэсэгт нь гаргана.
     // 4. Төсвийг тооцоолно.
     // 5. Эцсийн үлдэгдэл, тооцоог дэлгэцэнд гаргана.
-
-      if(event.keyCode === 13){
-        console.log("Enter дарсан байна.");
-      }else{
-        console.log("Өөр товч дарсан байна. Код нь : " + event.keyCode);
-      }
     }
-  document.querySelector(".add__btn").addEventListener("click", function(){
+
+var setupEventListeners = function(){
+  var domStrings = uiController.getDomStrings();
+  document.querySelector(domStrings.addButton).addEventListener("click", function(){
     ctrlAddItem();
-    alert("Clicked");
   })
 
-  document.addEventListener("keypress", function(event){
+  document.addEventListener(domStrings.keyPress, function(event){
+    
+    if(event.keyCode === 13){
     ctrlAddItem();
-        console.log("Pressed");
-    })
-  console.log("Hello from App");
+    }
+  })
+}
+return {
+    init : function(){
+      console.log("Application Started !!!");
+      setupEventListeners();
+    }
+  }
+
 })(uiController, financeController)
+
+appController.init();
