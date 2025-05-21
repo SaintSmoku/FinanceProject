@@ -24,13 +24,30 @@ var uiController = (function(){
     },
     addListItem : function(item, type){
       // Орлого болон зарлагын элементийг агуулсан "html"-ийг бэлтгэнэ.
-      var html = document.createElement("p");
-      html.append(item.value)
-      document.querySelector(".income__list").append(html);
+      // var html = document.createElement("p");
+      // html.append(item.value)
+      // document.querySelector(".income__list").append(html);
+
+      var html;
+
+      if (type == "inc"){
+        list = ".income__list";
+        html = '<div class="item clearfix" id="income-%id%"><div class="item__description">$$DESCRIPTION$$</div><div class="right clearfix"><div class="item__value">$$VALUE$$</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+      }else{
+        html = list = ".expenses__list";
+        html ='<div class="item clearfix" id="expense-%id%"><div class="item__description">$$DESCRIPTION$$</div><div class="right clearfix"><div class="item__value">$$VALUE$$</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>'
+      }
       
       // Мөн тэр "html" дотроо орлого зарлагын утгуудыг "REPLACE" ашиглан өөрчилнө.
+      if (item.description && item.value){
+        html = html.replace("%id%", item.id);
+        html = html.replace("$$DESCRIPTION$$", item.description);
+        html = html.replace("$$VALUE$$", item.value);
 
+        document.querySelector(list).insertAdjacentHTML("beforeend", html);
+      }
       // Бэлтгэсэн "html"-ээ DOM руу оруулна.
+      
     }
   }
 
