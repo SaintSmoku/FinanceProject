@@ -24,7 +24,10 @@ var uiController = (function(){
     },
     addListItem : function(item, type){
       // Орлого болон зарлагын элементийг агуулсан "html"-ийг бэлтгэнэ.
-
+      var html = document.createElement("p");
+      html.append(item.value)
+      document.querySelector(".income__list").append(html);
+      
       // Мөн тэр "html" дотроо орлого зарлагын утгуудыг "REPLACE" ашиглан өөрчилнө.
 
       // Бэлтгэсэн "html"-ээ DOM руу оруулна.
@@ -114,6 +117,8 @@ var appController = (function(uiController, financeController){
   var domStr = uiController.getDomStrings();
   document.querySelector(domStr.addButton).addEventListener("click", function(){
     ctrlAddItem();
+    document.querySelector(".add__description").value = "";
+    document.querySelector(".add__value").value = "";
   })
 
    
