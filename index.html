@@ -13,10 +13,37 @@
       type="text/css"
     />
     <link type="text/css" rel="stylesheet" href="style.css" />
+    <link type="text/css" rel="stylesheet" href="styleClock.css" />
     <title>Finance Project</title>
   </head>
   <body>
     <div class="top">
+      <div class="container1">
+        <div class="clock">
+          <div style="--clr: #ff3d58; --h: 24px" id="hour" class="hand">
+            <i></i>
+          </div>
+          <div style="--clr: #00a6ff; --h: 44px" id="min" class="hand">
+            <i></i>
+          </div>
+          <div style="--clr: #ffffff; --h: 64px" id="sec" class="hand">
+            <i></i>
+          </div>
+          <span style="--i: 1"><b>1</b></span>
+          <span style="--i: 2"><b>2</b></span>
+          <span style="--i: 3"><b>3</b></span>
+          <span style="--i: 4"><b>4</b></span>
+          <span style="--i: 5"><b>5</b></span>
+          <span style="--i: 6"><b>6</b></span>
+          <span style="--i: 7"><b>7</b></span>
+          <span style="--i: 8"><b>8</b></span>
+          <span style="--i: 9"><b>9</b></span>
+          <span style="--i: 10"><b>10</b></span>
+          <span style="--i: 11"><b>11</b></span>
+          <span style="--i: 12"><b>12</b></span>
+        </div>
+      </div>
+
       <div class="budget">
         <div class="budget__title">
           <span class="budget__title--month"></span> Өрхийн санхүү
@@ -63,7 +90,6 @@
 
         <div class="expenses">
           <h2 class="expenses__title">Зарлага</h2>
-
           <div class="expenses__list"></div>
         </div>
       </div>
