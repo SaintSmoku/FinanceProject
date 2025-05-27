@@ -24,7 +24,17 @@ var uiController = (function(){
       document.querySelector(domStrings.incField).textContent = budget.totalInc;
       document.querySelector(domStrings.expField).textContent = budget.totalExp;
 
-      budget.percent !== 0 ? document.querySelector(domStrings.percentField).textContent = budget.percent + '%' : document.querySelector(domStrings.percentField).textContent = budget.percent;
+      // console.log(isNaN(budget.percent));
+
+      if (isNaN(budget.percent) && budget.percent !== 0){
+        document.querySelector(domStrings.percentField).textContent = budget.percent + '%'
+      } else {
+        document.querySelector(domStrings.percentField).textContent = "0";
+      } 
+
+      // budget.percent !== 0 ? document.querySelector(domStrings.percentField).textContent = budget.percent + '%' : document.querySelector(domStrings.percentField).textContent = budget.percent;
+
+      // console.log(budget.percent);
       
       // document.querySelector(domStrings.percentField).append = '%';
     },
@@ -36,6 +46,7 @@ var uiController = (function(){
         value : parseInt(document.querySelector(domStrings.inputValue).value),
       }
     },
+  
     getDomStrings : function(){
       return domStrings;
     },
@@ -172,7 +183,12 @@ var financeController = function(){
       // Төсвийг тооцоолох
       financeData.budget = financeData.totals.inc - financeData.totals.exp;
       // Төсвийн үлдэгдлийн хувиар үзүүлэх
-      financeData.percent = Math.round((financeData.totals.exp / financeData.totals.inc) * 100);
+      if (financeData.totals.exp > financeData.totals.inc){
+        financeData.percent = 0;
+      } else {
+        financeData.percent = Math.round((financeData.totals.exp / financeData.totals.inc) * 100);
+      }
+      
     },
     getBudget : function(){
       return {
@@ -208,6 +224,7 @@ var appController = (function(uiController, financeController){
       // console.log(financeController.data()); 
       // 2. Олж авсан өгөгдлүүдээ санхүүгийн контроллерт дамжуулж, тэндээ хадгална.
       var item = financeController.addItem(getInput.type, getInput.description, getInput.value);
+      console.log(item);
       
       // 3. Олж авсан өгөгдлүүдээ веб дээр тохирох хэсэгт нь гаргана.
       uiController.addListItem(item, getInput.type);
